@@ -15,22 +15,22 @@ const printMaybeNull = (num: ?number) =>
 
 // RESULT example
 
-type Ok<T> = [true, T]
-type Err = [false, Error]
+type Ok<T> = { ok: true, value: T }
+type Err = { ok: false, error: Error }
 type Result<T> = Ok<T> | Err
 
 const calcResult = (): Result<number> => {
   try {
     const n = rand()
-    if (isOk(n)) return [true, n]
+    if (isOk(n)) return { ok: true, value: n }
     else throw new Error('Not above 0.5')
-  } catch (err) {
-    return [false, err]
+  } catch (error) {
+    return { ok: false, error }
   }
 }
 
 const printResult = (result: Result<number>) =>
-  result[0] ? console.log('above 0.5', result[1]) : console.log(result[1])
+  result.ok ? console.log('above 0.5', result.value) : console.log(result.error)
 
 const main = _ => {
   console.log('starting...')
