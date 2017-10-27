@@ -15,8 +15,8 @@ const printMaybeNull = (num: ?number) =>
 
 // RESULT example
 
-type Ok<T> = { ok: true, value: T }
-type Err = { ok: false, error: Error }
+type Ok<T> = {| ok: true, value: T |}
+type Err = {| ok: false, error: Error |}
 type Result<T> = Ok<T> | Err
 
 const calcResult = (): Result<number> => {
